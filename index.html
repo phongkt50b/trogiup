@@ -1,408 +1,312 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Trang Trợ Giúp - AIA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        :root {
-            --aia-red: #ED1C24;
-            --background-color: #f7f7f7;
-            --card-background: #ffffff;
-            --text-color: #333333;
-            --secondary-text-color: #555555;
-            --border-color: #eeeeee;
-            --primary-font: 'Be Vietnam Pro', sans-serif;
+        :root{
+            --aia-red: #d71921;
+            --aia-red-soft: rgba(215,25,33,0.08);
+            --bg-body: #f6f7f8;
+            --card-bg: #ffffff;
+            --muted: #6b7280;
+            --text: #0f1724;
+            --accent: #0f1724;
+            --radius-lg: 14px;
+            --radius-md: 10px;
+            --glass: rgba(255,255,255,0.6);
+            --border: #e6e9ec;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        *{box-sizing:border-box;margin:0;padding:0}
+        html,body{height:100%}
+        body{
+            font-family: "Be Vietnam Pro", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, #fbfbfc 0%, var(--bg-body) 100%);
+            color: var(--text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            line-height:1.5;
+            padding-bottom:40px;
         }
 
-        body {
-            font-family: var(--primary-font);
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
+        /* Layout container */
+        .wrap{
+            max-width:850px;
+            margin:20px auto;
+            padding:18px;
         }
 
-        header {
-            background-color: var(--card-background);
-            padding: 0 1rem;
-            height: 60px;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
+        /* Card */
+        .card{
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding:20px;
+            box-shadow: 0 8px 30px rgba(16,24,40,0.06);
+            border:1px solid var(--border);
+            overflow:hidden;
         }
 
-        .logo {
-            height: 24px;
-            justify-self: start;
+        .card h2{
+            font-size:13px;
+            font-weight:700;
+            color:var(--aia-red);
+            text-transform:uppercase;
+            letter-spacing:0.6px;
+            margin-bottom:14px;
         }
 
-        header h1 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-color);
-            text-transform: uppercase;
-            text-align: center;
+        /* icon list rows */
+        .icon-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+        .icon-item{
+            display:flex;
+            gap:12px;
+            align-items:center;
+            padding:8px 6px;
+            border-radius:10px;
+            transition: background .12s ease;
+        }
+        .icon-item:hover{background: rgba(15,23,36,0.02)}
+        .icon-dot{
+            width:40px;height:40px;border-radius:10px; display:flex;align-items:center;justify-content:center;
+            background: linear-gradient(180deg, rgba(215,25,33,0.12), rgba(215,25,33,0.06));
+            flex-shrink:0;
+        }
+        .icon-dot svg{width:16px;height:16px;fill:var(--aia-red)}
+
+        .icon-text{font-size:14px;color:var(--muted)}
+        .icon-text strong{color:var(--text);font-weight:600}
+
+        .divider{
+            height:1px;background:var(--border);border:none;margin:24px 0;border-radius:2px;
         }
 
-        main {
-            padding-top: 60px; /* Header height */
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--card-background);
+        /* Action list - bigger blocks */
+        .action-list{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+        .action-link{
+            display:flex;align-items:center;gap:14px;text-decoration:none;
+            padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.95));
+            border:1px solid rgba(15,23,36,0.03);
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+        .action-link:hover{transform:translateY(-4px); box-shadow: 0 10px 30px rgba(16,24,40,0.08)}
+        .action-icon{
+            width:56px;height:56px;border-radius:12px;background:var(--aia-red-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;
+        }
+        .action-icon svg{width:22px;height:22px;fill:var(--aia-red)}
+        .action-body{flex:1;display:flex;flex-direction:column}
+        .action-title{font-size:15px;color:var(--accent);font-weight:600}
+        .action-sub{font-size:13px;color:var(--muted);margin-top:4px}
+        .chev{width:20px;height:20px;flex-shrink:0;fill:#c7cbd1}
+
+        /* Second card small list */
+        .small-list{display:flex;flex-direction:column;gap:12px}
+        .small-item{display:flex;gap:12px;align-items:center;padding:8px;border-radius:10px}
+        .small-item .icon-dot{width:40px;height:40px;border-radius:10px}
+
+        /* Contact section */
+        .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
+        .contact-btn{
+            display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfbfb);
+            border:1px solid rgba(15,23,36,0.04); box-shadow: 0 8px 24px rgba(12,14,20,0.04);
+            transition: transform .12s ease;
+            text-align:center;color:var(--text);
+        }
+        .contact-btn:hover{transform:translateY(-4px)}
+        .contact-icon{width:28px;height:28px;margin-bottom:6px;fill:var(--aia-red)}
+
+        /* Responsive adjustments */
+        @media (min-width:900px){
+            .wrap{padding:28px}
+            .card{padding:28px}
+            .action-link{padding:16px}
         }
 
-        .info-section {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
+        @media (max-width:640px){
+            .wrap{padding:12px; margin-top: 12px;}
+            .card{padding:16px;border-radius:12px}
+            .action-icon{width:48px;height:48px;border-radius:10px}
+            .action-title{font-size:14px}
+            .contact-grid{grid-template-columns:1fr}
         }
 
-        .info-section:last-of-type {
-            border-bottom: none;
-        }
-
-        .info-section h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.25rem;
-            color: var(--aia-red);
-            text-transform: uppercase;
-        }
-
-        .info-section h3 {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
-        }
-
-        .info-section p {
-            margin-bottom: 0.75rem;
-        }
-
-        .info-section p, .info-section ul {
-            color: var(--secondary-text-color);
-            font-size: 0.95rem;
-        }
-
-        .info-section ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .info-section li {
-            margin-bottom: 0.75rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .info-section li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--aia-red);
-            font-size: 1.5rem;
-            line-height: 1;
-            top: 2px;
-        }
-
-        .action-grid-container {
-            background-color: var(--background-color);
-            padding: 2rem 1.5rem;
-        }
-
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .action-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-decoration: none;
-            color: var(--text-color);
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: transform 0.2s ease-out;
-            cursor: pointer;
-        }
-
-        .action-item span {
-            margin-top: 0.75rem;
-            height: 40px; /* ensure items have same height */
-            display: flex;
-            align-items: center;
-        }
-
-        .action-item:hover, .action-item:focus-visible {
-            transform: translateY(-5px);
-            outline: none;
-        }
-        .action-item:focus-visible .icon-circle {
-            outline: 2px solid var(--aia-red);
-            outline-offset: 3px;
-        }
-
-        .icon-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--aia-red);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(237, 28, 36, 0.3);
-            transition: box-shadow 0.2s;
-        }
-
-        .action-item:hover .icon-circle {
-            box-shadow: 0 6px 16px rgba(237, 28, 36, 0.4);
-        }
-
-        .icon-circle svg {
-            width: 28px;
-            height: 28px;
-            fill: #ffffff;
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-
-        .modal-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .modal-content {
-            background-color: var(--card-background);
-            width: 95%;
-            height: 90%;
-            max-width: 1200px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #e4e4e7;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            line-height: 1;
-            color: #52525b;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1001;
-        }
-
-        .close-button:hover {
-            background: #d4d4d8;
-            color: #18181b;
-        }
-
-        #modal-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 12px;
-        }
+        /* subtle link styles */
+        a.action-link, a.contact-btn{color:inherit}
     </style>
 </head>
 <body>
-    <header>
-        <img src="https://www.aia.com.vn/etc.clientlibs/com-aia-vn-website/clientlibs/clientlib-site/resources/img/AIA-logo.svg" alt="AIA Logo" class="logo">
-        <h1>Trang trợ giúp</h1>
-    </header>
 
-    <main>
-        <section class="info-section">
-            <h2>Các thông tin quan trọng bạn cần biết</h2>
-            <h3>Thông tin về thời gian chờ</h3>
-            <ul>
-                <li><strong>0 ngày</strong> cho tai nạn</li>
-                <li><strong>30 ngày</strong> cho bệnh thông thường</li>
-                <li><strong>90 ngày</strong> cho bệnh đặc biệt</li>
-                <li><strong>90 ngày</strong> cho ung thư, ghép tạng</li>
-                <li><strong>270 ngày</strong> cho các quyền lợi thai sản</li>
+    <main class="wrap">
+        <section class="card">
+            <!-- Important Info Section -->
+            <h2 id="important-info">Các thông tin quan trọng bạn cần biết</h2>
+            <ul class="icon-list" role="list">
+                <li class="icon-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>0 ngày</strong> cho tai nạn</div>
+                </li>
+                <li class="icon-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>30 ngày</strong> cho bệnh thông thường</div>
+                </li>
+                <li class="icon-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>90 ngày</strong> cho bệnh đặc biệt</div>
+                </li>
+                <li class="icon-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>90 ngày</strong> cho ung thư, ghép tạng</div>
+                </li>
+                <li class="icon-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>270 ngày</strong> cho các quyền lợi thai sản</div>
+                </li>
             </ul>
-        </section>
 
-        <section class="info-section">
-            <h2>Ứng dụng AIA+</h2>
-            <p>Quản lý hợp đồng, đổi thông tin và yêu cầu quyền lợi trực tuyến trên ứng dụng AIA+.</p>
-            <ul>
-                <li><strong>Tên đăng nhập:</strong> Số điện thoại của bên mua</li>
-                <li><strong>Mật khẩu:</strong> AIA Việt Nam gửi qua SMS/Zalo sau khi hợp đồng phát hành</li>
+            <hr class="divider">
+
+            <!-- Claim Documents Section -->
+            <h2 id="claim-docs">Hồ sơ yêu cầu bồi thường hợp lệ</h2>
+            <ul class="small-list" role="list" aria-label="Hồ sơ bồi thường hợp lệ">
+                <li class="small-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>Phiếu khám và chỉ định</strong> của bác sĩ</div>
+                </li>
+                <li class="small-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>Toa thuốc</strong> có chẩn đoán, tên bác sĩ, dấu cơ sở y tế</div>
+                </li>
+                <li class="small-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>Hóa đơn tài chính (VAT)</strong> đầy đủ</div>
+                </li>
+                 <li class="small-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>Giấy ra viện / Tóm tắt bệnh án</strong> (nếu nội trú)</div>
+                </li>
+                 <li class="small-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>Giấy chứng nhận phẫu thuật</strong> (nếu có)</div>
+                </li>
+                 <li class="small-item">
+                    <div class="icon-dot" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    </div>
+                    <div class="icon-text"><strong>Biên bản tai nạn</strong> (nếu yêu cầu quyền lợi tai nạn)</div>
+                </li>
             </ul>
-        </section>
+            
+            <hr class="divider">
 
-        <section class="info-section">
-            <h2>Hồ sơ bồi thường hợp lệ</h2>
-            <ul>
-                <li>Phiếu khám và chỉ định của bác sĩ</li>
-                <li>Toa thuốc có chẩn đoán, tên bác sĩ, dấu cơ sở y tế</li>
-                <li>Hóa đơn tài chính (VAT) đầy đủ</li>
-                <li>Giấy ra viện / Tóm tắt bệnh án (nếu nội trú)</li>
-                <li>Giấy chứng nhận phẫu thuật (nếu có)</li>
-                <li>Biên bản tai nạn (nếu yêu cầu quyền lợi tai nạn)</li>
-            </ul>
-        </section>
+            <!-- Quick Access Section -->
+            <h2 id="quick-access">Truy cập nhanh</h2>
+            <div class="action-list" aria-label="Action links">
+                <a class="action-link" href="https://www.aia.com.vn/vi/dich-vu/dich-vu-bao-hiem-suc-khoe-aia/bao-lanh-vien-phi.html" target="_blank" rel="noopener noreferrer">
+                    <div class="action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M16 4H8C6.9 4 6 4.9 6 6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 10h-2v2h-2v-2H9v-2h2V8h2v2h2v2z"/></svg>
+                    </div>
+                    <div class="action-body">
+                        <div class="action-title">Danh sách bệnh viện bảo lãnh</div>
+                        <div class="action-sub">Xem danh sách bệnh viện AIA hỗ trợ bảo lãnh viện phí</div>
+                    </div>
+                    <svg class="chev" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path></svg>
+                </a>
 
-        <section class="action-grid-container">
-            <div class="action-grid">
-                <a href="#" id="hospital-list" class="action-item" role="button">
-                    <div class="icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"></path></svg>
+                <a class="action-link" href="https://www.aia.com.vn/vi/iclaim.html" target="_blank" rel="noopener noreferrer">
+                    <div class="action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
                     </div>
-                    <span>Danh sách bệnh viện</span>
+                    <div class="action-body">
+                        <div class="action-title">Nộp hồ sơ bồi thường online</div>
+                        <div class="action-sub">Gửi yêu cầu bồi thường và theo dõi tiến trình trực tuyến</div>
+                    </div>
+                    <svg class="chev" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path></svg>
                 </a>
-                <a href="tel:02838122777" class="action-item">
-                    <div class="icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+
+                <a class="action-link" href="https://www.aia.com.vn/vi/san-pham/lai-suat-va-gia-don-vi-quy.html" target="_blank" rel="noopener noreferrer">
+                    <div class="action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.09-4-4L2 17.08l1.5 1.41z"></path></svg>
                     </div>
-                    <span>Hotline</span>
+                    <div class="action-body">
+                        <div class="action-title">Lãi suất &amp; giá đơn vị quỹ</div>
+                        <div class="action-sub">Thông tin cập nhật về lãi suất và giá quỹ</div>
+                    </div>
+                    <svg class="chev" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path></svg>
                 </a>
-                <a href="mailto:vn.customer@aia.com" class="action-item">
-                     <div class="icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+
+                <a class="action-link" href="https://www.aia.com.vn/vi/dich-vu/thay-doi-thong-tin-hop-dong.html" target="_blank" rel="noopener noreferrer">
+                    <div class="action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
                     </div>
-                    <span>Email</span>
+                    <div class="action-body">
+                        <div class="action-title">Thay đổi thông tin hợp đồng</div>
+                        <div class="action-sub">Cập nhật thông tin cá nhân, liên hệ, người thụ hưởng</div>
+                    </div>
+                    <svg class="chev" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path></svg>
                 </a>
-                <a href="#" id="submit-claim" class="action-item" role="button">
-                    <div class="icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"></path></svg>
+
+                <a class="action-link" href="https://www.aia.com.vn/vi/dich-vu/gioi-thieu-ve-aia-plus.html" target="_blank" rel="noopener noreferrer">
+                    <div class="action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zM11.5 22c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5S12.33 22 11.5 22zm4.5-3H8V5h8v14z"></path></svg>
                     </div>
-                    <span>Nộp hồ sơ bồi thường</span>
-                </a>
-                <a href="#" id="fund-prices" class="action-item" role="button">
-                    <div class="icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.09-4-4L2 17.08l1.5 1.41z"></path></svg>
+                    <div class="action-body">
+                        <div class="action-title">Giới thiệu về App AIA+</div>
+                        <div class="action-sub">Tải app, quản lý hợp đồng và sử dụng tính năng bảo lãnh</div>
                     </div>
-                    <span>Lãi suất & giá đơn vị quỹ</span>
-                </a>
-                <a href="#" id="change-info" class="action-item" role="button">
-                    <div class="icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
-                    </div>
-                    <span>Thay đổi thông tin</span>
-                </a>
-                <a href="#" id="aia-plus-guide" class="action-item" role="button">
-                    <div class="icon-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"></path></svg>
-                    </div>
-                    <span>Hướng dẫn App AIA+</span>
+                    <svg class="chev" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path></svg>
                 </a>
             </div>
+
+            <hr class="divider">
+
+            <!-- Contact Section -->
+            <h2 id="contact">Liên hệ</h2>
+            <div class="contact-grid" role="list">
+                <a class="contact-btn" href="tel:02838122777">
+                    <svg class="contact-icon" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.02.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <div style="font-weight:600">Gọi Hotline</div>
+                            <div style="font-size:13px;color:var(--muted);margin-top:6px">1900 558 899</div>
+                </a>
+
+                <a class="contact-btn" href="mailto:vn.customer@aia.com">
+                    <svg class="contact-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <div style="font-weight:600">Gửi Email</div>
+                    <div style="font-size:13px;color:var(--muted);margin-top:6px">vn.customer@aia.com</div>
+                </a>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <div style="font-size:13px;color:var(--muted);text-align:center">Bạn cần thêm hỗ trợ? Liên hệ hotline hoặc gửi email để được hướng dẫn chi tiết.</div>
         </section>
     </main>
-    
-    <div id="modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-content">
-            <button id="close-modal" class="close-button" aria-label="Đóng">&times;</button>
-            <iframe id="modal-iframe" src="" frameborder="0" title="Nội dung trang web bên ngoài"></iframe>
-        </div>
-    </div>
-
-    <script type="module">
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('modal');
-            const closeModalBtn = document.getElementById('close-modal');
-            const modalIframe = document.getElementById('modal-iframe');
-            
-            if (!modal || !closeModalBtn || !modalIframe) {
-                console.error("Modal elements not found!");
-                return;
-            }
-
-            const modalLinks = {
-                'hospital-list': 'https://www.aia.com.vn/vi/dich-vu/dich-vu-bao-hiem-suc-khoe-aia/bao-lanh-vien-phi.html',
-                'submit-claim': 'https://www.aia.com.vn/vi/iclaim.html',
-                'fund-prices': 'https://www.aia.com.vn/vi/san-pham/lai-suat-va-gia-don-vi-quy.html',
-                'change-info': 'https://www.aia.com.vn/vi/dich-vu/thay-doi-thong-tin-hop-dong.html',
-                'aia-plus-guide': 'https://www.aia.com.vn/vi/dich-vu/gioi-thieu-ve-aia-plus.html',
-            };
-
-            const openModal = (url) => {
-                modalIframe.src = url;
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            };
-
-            const closeModal = () => {
-                modal.classList.add('hidden');
-                modalIframe.src = ''; // Clear src to stop loading/playing content
-                document.body.style.overflow = ''; // Restore background scrolling
-            };
-
-            document.querySelector('.action-grid')?.addEventListener('click', (event) => {
-                const target = event.target;
-                const actionItem = target.closest('.action-item');
-                
-                if (actionItem && actionItem.id in modalLinks) {
-                    event.preventDefault();
-                    const url = modalLinks[actionItem.id];
-                    openModal(url);
-                }
-            });
-
-            closeModalBtn.addEventListener('click', closeModal);
-
-            // Close modal when clicking on the overlay
-            modal.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // Close modal with Escape key
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
-                    closeModal();
-                }
-            });
-        });
-    </script>
 </body>
 </html>
